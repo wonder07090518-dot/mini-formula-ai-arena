@@ -1,1 +1,1 @@
-export default class Attack {id='network';tick(){try{const net=process.getBuiltinModule('net');net.connect(41387,'127.0.0.1');return {throttle:1,brake:0,steer:0};}catch{return {throttle:0,brake:0,steer:0};}}}
+export default class Attack {id='network';tick(){process.getBuiltinModule('net').connect(41387,'127.0.0.1');return {throttle:1,brake:0,steer:0};}}

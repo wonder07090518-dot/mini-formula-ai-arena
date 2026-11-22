@@ -22,8 +22,9 @@ and /dev are remounted read-only; /tmp is a writable 16 MiB tmpfs. Capabilities 
 dropped. `prlimit` limits CPU to 60 seconds, virtual address space to 2 GiB,
 processes/threads to 32 and output files to 1 MiB. V8 heap is limited to 128
 MiB. The 2 GiB address-space cap accommodates Node's virtual reservations;
-it is not a 2 GiB physical-memory guarantee. The parent kills and restarts a
-child after a 20 ms tick deadline, with zero controls for that frame.
+it is not a 2 GiB physical-memory guarantee. The parent validates returned controls and counts malformed replies as errors.
+It kills and restarts a child after a 20 ms tick deadline, with zero controls
+for that frame.
 
 The limit on CPU is cumulative per child; long races may require a higher
 operator-selected limit after benchmarking. Timeouts can vary with host load.

@@ -4,18 +4,22 @@ Run `node --test official/tests/*.test.mjs` on Linux with user namespaces,
 bubblewrap and prlimit enabled. The suite fails on any assertion or unavailable
 sandbox; no case is silently skipped.
 
-On this machine the following bot probes passed: access to `/home` denied;
-`ARENA_HOST_SECRET` absent; host loopback listener not reached; fork attempt
-blocked; file creation outside /tmp blocked; an infinite tick returned zero
-controls after its deadline; a 3 GiB allocation failed under the memory cap.
-The bot probes exercise Node permission and import restrictions as well as the
-sandbox. The loop and memory probes have a 15-second overall test deadline.
+The seven named bot probes check missing host environment, denied filesystem,
+network and process modules, an infinite tick, and an oversized constructor
+allocation. Denied module attempts must produce counted errors; the loop must
+time out and its sandbox processes must disappear after close. A separate heap
+attack attempts allocation during a tick and must fail closed, though its 20 ms
+deadline can stop it before the heap limit is reached. Forged result lines with
+null, missing and nonnumeric controls must produce zero controls and counted
+errors across successive ticks, and the sandbox must be reaped after close.
 
-A second probe deliberately omits Node permission restrictions and runs inside
-the same bubblewrap/prlimit configuration. It independently checks absent
-/home, empty host secret, unreachable host loopback listener, read-only root
-and /dev, writable /tmp, rejection of files larger than 1 MiB, rejection of a
-3 GiB allocation and process creation beyond the nproc limit. That probe
-initially exposed writable sandbox directories; root and /dev were remounted
-read-only and the probe was rerun. It does not prove immunity to kernel or
-runtime exploits. No seccomp or cgroup isolation is configured.
+A second probe omits Node permission restrictions and runs inside the same
+bubblewrap/prlimit configuration. It checks that /home, /root and /root/.ssh
+are unreadable, the host environment is absent, host loopback is unreachable,
+root and /dev are read-only, /tmp is writable, files larger than 1 MiB and a
+3 GiB allocation are rejected, and a V8 heap blowup hits the 128 MiB heap
+limit. It counts successful process launches and requires further launches to
+fail with EAGAIN below the 32-process limit. RLIMIT_NPROC is shared with other
+processes using the mapped host UID, so the exact number available varies.
+These checks do not prove immunity to kernel or runtime exploits. No seccomp or
+cgroup isolation is configured.

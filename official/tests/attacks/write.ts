@@ -1,1 +1,1 @@
-export default class Attack {id='write';tick(){try{const fs=process.getBuiltinModule('fs');fs.writeFileSync('/arena/outside','x');return {throttle:1,brake:0,steer:0};}catch{return {throttle:0,brake:0,steer:0};}}}
+export default class Attack {id='write';tick(){process.getBuiltinModule('fs').writeFileSync('/arena/outside','x');return {throttle:1,brake:0,steer:0};}}

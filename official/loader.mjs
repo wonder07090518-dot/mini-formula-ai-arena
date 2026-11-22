@@ -33,7 +33,7 @@ export async function createIsolatedBot(file,seed){
      if(remaining<=0){adapter.timeoutCount++;worker.postMessage({kind:'cancel',seq});return ZERO;}
      const observed=Atomics.load(state,3);if(observed!==seq)Atomics.wait(state,3,observed,remaining);
     }
-    try{const result=JSON.parse(Buffer.from(bytes.subarray(0,Atomics.load(state,2))).toString());if(result.kind==='result')return result.controls;adapter.errorCount++;adapter.lastError=result.error;return ZERO;}
+    try{const result=JSON.parse(Buffer.from(bytes.subarray(0,Atomics.load(state,2))).toString());if(result.kind==='result'){const controls=result.controls;if(controls!==null&&typeof controls==='object'&&Object.getPrototypeOf(controls)===Object.prototype&&['throttle','brake','steer'].every(k=>typeof controls[k]==='number'))return controls;adapter.errorCount++;adapter.lastError='Invalid controls in child result';return ZERO;}adapter.errorCount++;adapter.lastError=result.error;return ZERO;}
     catch(error){adapter.errorCount++;adapter.lastError=String(error);return ZERO;}
    },
    async close(){await new Promise(resolve=>{const timer=setTimeout(()=>{worker.terminate().finally(resolve);},1000);worker.once('exit',()=>{clearTimeout(timer);resolve();});worker.postMessage({kind:'close'});});await fs.rm(dir,{recursive:true,force:true});}
