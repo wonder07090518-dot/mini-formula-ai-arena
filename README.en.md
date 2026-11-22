@@ -1,5 +1,8 @@
 # Driving bots (game simulation)
 
+> [!IMPORTANT]
+> **Status:** practice and submissions are open; official scoring is still being connected, so no official results yet. No timeline is promised.
+
 This repository is not the full Mini Formula game. The public repository is
 https://github.com/wonder07090518-dot/mini-formula-ai-arena .
 The operator entry point currently provides a study smoke test only;
