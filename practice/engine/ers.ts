@@ -1,5 +1,5 @@
 /** Bounded energy assistance shared by every physical driver, including AI.
- * Energy is normalized, not a claim to real Formula 1 battery specifications. */
+ * Energy is normalized, not a claim to real-world racing battery specifications. */
 export const ERS_TUNE=Object.freeze({forceBonus:.12,drainPerSecond:1/8,minSpeed:1.5,maxRegenPerSecond:.16,kineticRecovery:.32,referenceSpeed:48*(3.4/3.5)});
 export interface ErsTelemetry {energy:number;active:boolean;regenerating:boolean}
 export interface ErsFrame {requested:boolean;throttle:number;brake:number;speed:number;grounded:boolean;allowed:boolean}
