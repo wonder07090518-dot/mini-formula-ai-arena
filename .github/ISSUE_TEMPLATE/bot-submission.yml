@@ -1,0 +1,22 @@
+name: Driving bot submission
+description: Submit a link to a public, self-contained bot file.
+body:
+  - type: input
+    id: bot
+    attributes:
+      label: Public bot file URL
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+    validations:
+      required: true
+  - type: checkboxes
+    id: handout
+    attributes:
+      label: Handout
+      options:
+        - label: I have read the bot handout and submit one self-contained TypeScript file.
+          required: true

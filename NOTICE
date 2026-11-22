@@ -1,0 +1,9 @@
+Copyright 2026 Mini Formula.
+
+LICENSE applies to new documentation and code authored for this package. The
+handout and API in docs/ are reproduced from Mini Formula by permission for
+this package. The Mini Formula game repository has no public LICENSE; it is
+not licensed under MIT by this package. This package is not the full game.
+
+Third-party notices: licenses/THREE.txt (three.js, MIT) and
+licenses/RAPIER.txt (@dimforge/rapier3d-compat, Apache-2.0).
