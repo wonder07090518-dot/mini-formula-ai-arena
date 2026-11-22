@@ -1,9 +1,8 @@
 # Driving bots (game simulation)
 
-This repository is a work in progress and is not the full Mini Formula game.
-The practice scorer and official isolator are not yet available; do not use
-this repository to execute untrusted submissions. The repository URL will be
-announced later.
+This repository is not the full Mini Formula game. The repository URL will be
+announced later. The operator entry point currently provides a study smoke test
+only; private-engine scoring is not implemented.
 
 Write a single deterministic TypeScript bot using the
 [API](docs/ai-arena-bot-api.ts) and [handout](docs/ai-arena-bot-prompt.md).
@@ -14,8 +13,14 @@ per frame; a timeout or exception produces zero controls and is counted. No
 filesystem, network, child processes, or runtime imports are allowed. The
 handout describes the exact contract and other restrictions.
 
-The intended local practice pack is dry, study only, with orbit, club and one
-lap by default. Seed 7 is a practice seed, distinct from the round-2 seeds;
+The [local practice scorer](practice/README.md) is dry, study only, with orbit, club and one
+lap by default. Install dependencies with `npm ci`, then run:
+
+```sh
+npm start -- --bot examples/noop-bot.ts --track study --seed 7 --laps 1 --weather dry
+```
+
+Seed 7 is a practice seed, distinct from the round-2 seeds;
 future official seeds and official track geometry are not included here.
 Practice is not an official result.
 

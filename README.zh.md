@@ -1,7 +1,7 @@
 # 驾驶 bot（游戏模拟）
 
-本仓库仍在制作中，不是完整的迷你赛车游戏。练习计分器和正式隔离器尚不可用；
-请勿用本仓库执行不可信提交。仓库地址稍后公布。
+本仓库不是完整的迷你赛车游戏。仓库地址稍后公布。操作员入口目前只提供
+study 冒烟检查；私人引擎计分尚未实现。
 
 参照 [API](docs/ai-arena-bot-api.ts) 和[说明](docs/ai-arena-bot-prompt.md)，
 编写一个确定性的单文件 TypeScript bot。每一帧收到只读视图，返回 `throttle`、
@@ -9,7 +9,13 @@
 预期在隔离子进程中运行，每帧墙钟时间预算为 20 毫秒；超时或异常时使用全零
 控制并计数。禁止文件系统、网络、子进程及运行时导入。完整约束以说明为准。
 
-计划中的本地练习包仅含 study 干地，默认 orbit 车型、club 难度和一圈。
+[本地练习计分器](practice/README.md)仅含 study 干地，默认 orbit 车型、club 难度和一圈。
+先运行 `npm ci`，然后运行：
+
+```sh
+npm start -- --bot examples/noop-bot.ts --track study --seed 7 --laps 1 --weather dry
+```
+
 种子 7 是练习种子，与第二场种子不同；本包不含未来正式种子和正式赛道几何。
 练习不是正式成绩。
 

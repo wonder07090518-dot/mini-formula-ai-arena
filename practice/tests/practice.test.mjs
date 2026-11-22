@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {readFileSync,readdirSync} from 'node:fs';
+import {penalizedTime} from '../score.mjs';
+const invoke=(...args)=>spawnSync(process.execPath,['--import','tsx','practice/race.mjs',...args],{encoding:'utf8',timeout:120000});
+test('penalty is half a second per wall hit',()=>assert.equal(penalizedTime(12.25,3),13.75));
+test('only study can be selected',()=>{for(const id of ['grandprix','kitchen','bathroom','livingroom','sunroom','oval','flow','technical'])assert.notEqual(invoke('--bot','examples/noop-bot.ts','--track',id,'--max-ticks','1').status,0,id)});
+test('no excluded track layout identifiers occur in study layout',()=>{const sources=readdirSync('practice/engine').filter(f=>f.endsWith('.ts')).map(f=>readFileSync('practice/engine/'+f,'utf8')).join('\n');for(const id of ['grandprix','kitchen','bathroom','livingroom','sunroom','oval','flow','technical'])assert.doesNotMatch(sources,new RegExp(`\\b${id}\\b`,'i'));});
+test('study seed 7 is repeatable',()=>{const args=['--bot','examples/noop-bot.ts','--seed','7','--track','study','--laps','1','--weather','dry'];const a=invoke(...args),b=invoke(...args);assert.equal(a.status,0,a.stderr);assert.equal(b.status,0,b.stderr);assert.equal(a.stdout,b.stdout);const result=JSON.parse(a.stdout);assert.equal(result.gameSimulation,true);assert.equal(result.cars[0].timeoutCount,0);assert.equal(result.cars[0].errorCount,0);});
+test('exceptions produce zero controls and are counted',()=>{const run=invoke('--bot','practice/tests/fixtures/throw.ts','--track','study','--seed','7','--max-ticks','4');assert.equal(run.status,0,run.stderr);const car=JSON.parse(run.stdout).cars[0];assert.equal(car.errorCount,4);assert.equal(car.timeoutCount,0);});

@@ -7,3 +7,12 @@ not licensed under MIT by this package. This package is not the full game.
 
 Third-party notices: licenses/THREE.txt (three.js, MIT) and
 licenses/RAPIER.txt (@dimforge/rapier3d-compat, Apache-2.0).
+
+Mini Formula engine and runner excerpts: practice/engine/driving-bot.ts,
+ers.ts, handling.ts, kerb-surface.ts, opponents.ts, physics.ts,
+race-director.ts, render-pose.ts, stuck-detector.ts, track-layout.ts,
+vehicle-catalog.ts, vehicle-geometry.ts, vehicle-spec.ts, practice/grid.mjs,
+and official/child.mjs, official/loader.mjs, official/broker.mjs. These have
+been adapted for this package.
+
+Copyright 2026 Mini Formula. Not an open-source license grant for the full game. Included only so participants can run the study-track practice scorer in this package. Do not copy these files into another project. Public release of this package still requires the copyright holder to confirm this notice.
