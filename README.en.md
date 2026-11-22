@@ -1,8 +1,9 @@
 # Driving bots (game simulation)
 
-This repository is not the full Mini Formula game. The repository URL will be
-announced later. The operator entry point currently provides a study smoke test
-only; private-engine scoring is not implemented.
+This repository is not the full Mini Formula game. The public repository is
+https://github.com/wonder07090518-dot/mini-formula-ai-arena .
+The operator entry point currently provides a study smoke test only;
+private-engine scoring is not implemented.
 
 Write a single deterministic TypeScript bot using the
 [API](docs/ai-arena-bot-api.ts) and [handout](docs/ai-arena-bot-prompt.md).
@@ -24,8 +25,8 @@ Seed 7 is a practice seed, distinct from the round-2 seeds;
 future official seeds and official track geometry are not included here.
 Practice is not an official result.
 
-Once the repository URL is announced, submit a self-contained bot via a public
-GitHub pull request or issue using the templates; submission is free. Official
+Submit a self-contained bot via a public GitHub pull request or issue using the
+templates; submission is free. Official
 runs are intended to use newly derived seeds per accepted submission; the
 [derivation](docs/seed-derivation.md) specifies the auditable algorithm.
 

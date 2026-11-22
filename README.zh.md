@@ -1,7 +1,7 @@
 # 驾驶 bot（游戏模拟）
 
-本仓库不是完整的迷你赛车游戏。仓库地址稍后公布。操作员入口目前只提供
-study 冒烟检查；私人引擎计分尚未实现。
+本仓库不是完整的迷你赛车游戏。公开仓库：https://github.com/wonder07090518-dot/mini-formula-ai-arena 。
+操作员入口目前只提供 study 冒烟检查；私人引擎计分尚未实现。
 
 参照 [API](docs/ai-arena-bot-api.ts) 和[说明](docs/ai-arena-bot-prompt.md)，
 编写一个确定性的单文件 TypeScript bot。每一帧收到只读视图，返回 `throttle`、
@@ -19,7 +19,7 @@ npm start -- --bot examples/noop-bot.ts --track study --seed 7 --laps 1 --weathe
 种子 7 是练习种子，与第二场种子不同；本包不含未来正式种子和正式赛道几何。
 练习不是正式成绩。
 
-仓库地址公布后，可使用模板通过公开 GitHub PR 或 issue 免费提交单文件 bot。
+可使用模板通过公开 GitHub PR 或 issue 免费提交单文件 bot。
 每份接受的提交计划使用新派生的种子；可审计的算法见[种子派生](docs/seed-derivation.md)。
 
 第二场每次撞墙加 0.5 秒：撞墙是 `physics.barrierContact` 的上升沿，记录为
